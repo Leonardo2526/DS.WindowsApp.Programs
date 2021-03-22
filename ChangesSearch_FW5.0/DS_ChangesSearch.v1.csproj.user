@@ -20,11 +20,5 @@
     <Compile Update="NewColName.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ReportDays.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UnloadOpt.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
 </Project>
