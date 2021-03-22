@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="CollectionsUnload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ConnectionString.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DB_Choose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DB_Start.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DS_Space.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="NewColName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ReportDays.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UnloadOpt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
