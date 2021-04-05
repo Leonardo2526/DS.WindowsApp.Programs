@@ -12,13 +12,13 @@ namespace DS_Forms
         private Button selectButton;
         private OpenFileDialog openFileDialog1;
 
-        public string DS_OpenFileDialogForm_txt()
+        public string DS_OpenFileDialogForm_txt(string filename = "Select a text file", string title = "Open text file")
         {
             openFileDialog1 = new OpenFileDialog()
             {
-                FileName = "Select a text file",
+                FileName = filename,
                 Filter = "Text files (*.txt)|*.txt",
-                Title = "Open text file"
+                Title = title
             };
 
             selectButton = new Button()
