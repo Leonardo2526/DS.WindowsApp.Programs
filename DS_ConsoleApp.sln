@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS_FileSystem.v1", "FileSys
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS_MainTools.v1", "MainTools_FW4.7.2\DS_MainTools.v1.csproj", "{A8F47095-3B89-4A64-9AC3-D5D8289BCDDF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C3DLayersDBTool", "..\DS_WPF\C3DLayersDBTool\C3DLayersDBTool.csproj", "{0B1245F3-F8A7-49C0-856F-1739BA462DDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{A8F47095-3B89-4A64-9AC3-D5D8289BCDDF}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{A8F47095-3B89-4A64-9AC3-D5D8289BCDDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8F47095-3B89-4A64-9AC3-D5D8289BCDDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B1245F3-F8A7-49C0-856F-1739BA462DDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B1245F3-F8A7-49C0-856F-1739BA462DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B1245F3-F8A7-49C0-856F-1739BA462DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B1245F3-F8A7-49C0-856F-1739BA462DDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
