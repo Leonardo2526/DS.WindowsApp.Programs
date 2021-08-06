@@ -1,25 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FindIntersection
 {
     class Program
     {
-        //Start and end coordinates of lines
-        static double X1 = 37;
-        static double Y1 = 18;
-        static double X2 = 25;
-        static double Y2 = 13;
-        static double X3 = 23;
-        static double Y3 = 20;
-        static double X4 = 40;
-        static double Y4 = 17;
 
-        
+        static readonly List<Line> Line_XY = new List<Line>()
+        {
+            new Line { X1 = 1, Y1 = 10, X2 = 5, Y2 = 13},
+            new Line { X1 = 9, Y1 = 12, X2 = 10, Y2 = 1}
+        };
 
         static void Main(string[] args)
         {
-            //Check if intersection is available
-            if (Math.Max(X1, X2) < Math.Min(X3, X4) | Math.Max(Y1, Y2) < Math.Min(Y3, Y4))
+            if (IfIntersectionAvailable() == false)
             {
                 Console.WriteLine("There are No avilable intersecions.");
                 return;
@@ -29,15 +24,15 @@ namespace FindIntersection
             double Ya = 0;
 
             //Check if lines are vertical
-            if (X1 == X2 | X3 == X4)
-                GetCoordinatesIfVertical(ref Ya);
+            if (Line_XY[0].X1 == Line_XY[0].X2 || Line_XY[1].X1 == Line_XY[1].X2)
+                GetCoordinatesIfVertical(ref Xa, ref Ya);
             else
             {
                 //Get coefficients values of line equation 
-                double A1 = (Y1 - Y2) / (X1 - X2);
-                double A2 = (Y3 - Y4) / (X3 - X4);
-                double b1 = Y1 - (A1 * X1);
-                double b2 = Y3 - (A2 * X3);
+                double A1 = (Line_XY[0].Y1 - Line_XY[0].Y2) / (Line_XY[0].X1 - Line_XY[0].X2);
+                double A2 = (Line_XY[1].Y1 - Line_XY[1].Y2) / (Line_XY[1].X1 - Line_XY[1].X2);
+                double b1 = Line_XY[0].Y1 - (A1 * Line_XY[0].X1);
+                double b2 = Line_XY[1].Y1 - (A2 * Line_XY[1].X1);
 
                 //Parallel segments
                 if (A1 == A2)
@@ -51,7 +46,7 @@ namespace FindIntersection
                 Ya = A1 * Xa + b1;
             }
 
-            
+
 
             //Transform float to string with double precision
             string XaOut = String.Format("{0:0.00}", Xa);
@@ -75,42 +70,55 @@ namespace FindIntersection
         {
             if (Xa == 0)
             {
-                 if (Ya < Math.Max(Math.Min(Y1, Y2), Math.Min(Y3, Y4)))
+                if (Ya < Math.Max(Math.Min(Line_XY[0].Y1, Line_XY[0].Y2), Math.Min(Line_XY[1].Y1, Line_XY[1].Y2)))
                     return false;
-                else if (Ya > Math.Min(Math.Max(Y1, Y2), Math.Max(Y3, Y4)))
+                else if (Ya > Math.Min(Math.Max(Line_XY[0].Y1, Line_XY[0].Y2), Math.Max(Line_XY[1].Y1, Line_XY[1].Y2)))
                     return false;
             }
             else
             {
-                if (Xa < Math.Max(Math.Min(X1, X2), Math.Min(X3, X4)))
+                if (Xa < Math.Max(Math.Min(Line_XY[0].X1, Line_XY[0].X2), Math.Min(Line_XY[1].X1, Line_XY[1].X2)))
                     return false;
-                else if (Xa > Math.Min(Math.Max(X1, X2), Math.Max(X3, X4)))
+                else if (Xa > Math.Min(Math.Max(Line_XY[0].X1, Line_XY[0].X2), Math.Max(Line_XY[1].X1, Line_XY[1].X2)))
                     return false;
-            }          
+            }
 
             return true;
 
         }
 
-        static void GetCoordinatesIfVertical(ref double Ya)
+        static bool IfIntersectionAvailable()
         {
-            if (X1==X2)
-            {
-                double Xa = X1;
+            //Check if intersection is available
+            if (Math.Max(Line_XY[0].X1, Line_XY[0].X2) < Math.Min(Line_XY[1].X1, Line_XY[1].X2) |
+                Math.Max(Line_XY[0].Y1, Line_XY[0].Y2) < Math.Min(Line_XY[1].Y1, Line_XY[1].Y2))
+                return false;
+            else if (Math.Max(Line_XY[1].X1, Line_XY[1].X2) < Math.Min(Line_XY[0].X1, Line_XY[0].X2) |
+                Math.Max(Line_XY[1].Y1, Line_XY[1].Y2) < Math.Min(Line_XY[0].Y1, Line_XY[0].Y2))
+                return false;
+            return true;
+        }
 
-                double A2 = (Y3 - Y4) / (X3 - X4);
-                double b2 = Y3 - (A2 * X3);
+
+        static void GetCoordinatesIfVertical(ref double Xa, ref double Ya)
+        {
+            if (Line_XY[0].X1 == Line_XY[0].X2)
+            {
+                Xa = Line_XY[0].X1;
+
+                double A2 = (Line_XY[1].Y1 - Line_XY[1].Y2) / (Line_XY[1].X1 - Line_XY[1].X2);
+                double b2 = Line_XY[1].Y1 - (A2 * Line_XY[1].X1);
                 Ya = A2 * Xa + b2;
             }
             else
             {
-                double Xa = X3;
-                double A1 = (Y1 - Y2) / (X1 - X2);
-                double b1 = Y1 - (A1 * X1);
+                Xa = Line_XY[1].X1;
+                double A1 = (Line_XY[0].Y1 - Line_XY[0].Y2) / (Line_XY[0].X1 - Line_XY[0].X2);
+                double b1 = Line_XY[0].Y1 - (A1 * Line_XY[0].X1);
 
                 Ya = A1 * Xa + b1;
             }
         }
-            
+
     }
 }
