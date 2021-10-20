@@ -25,3 +25,12 @@ D:\Repository\DS_ConsoleApp\MainTools_FW4.7.2\obj\Release\DS_MainTools.v1.csproj
 D:\Repository\DS_ConsoleApp\MainTools_FW4.7.2\obj\Release\DS_MainTools.v1.csproj.CoreCompileInputs.cache
 D:\Repository\DS_ConsoleApp\MainTools_FW4.7.2\obj\Release\DS_MainTools_Net_FW_4.7.2.dll
 D:\Repository\DS_ConsoleApp\MainTools_FW4.7.2\obj\Release\DS_MainTools_Net_FW_4.7.2.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_ConsoleApp\MainTools_FW4.7.2\bin\Release\DS_MainTools_Net_FW_4.7.2.dll.config
+C:\Users\d.saraev.GCM\source\repos\DS_ConsoleApp\MainTools_FW4.7.2\bin\Release\DS_MainTools_Net_FW_4.7.2.dll
+C:\Users\d.saraev.GCM\source\repos\DS_ConsoleApp\MainTools_FW4.7.2\bin\Release\DS_MainTools_Net_FW_4.7.2.pdb
+C:\Users\d.saraev.GCM\source\repos\DS_ConsoleApp\MainTools_FW4.7.2\obj\Release\DS_MainTools.v1.csproj.AssemblyReference.cache
+C:\Users\d.saraev.GCM\source\repos\DS_ConsoleApp\MainTools_FW4.7.2\obj\Release\DS_MainTools_Net_FW_4._7._2.Properties.Resources.resources
+C:\Users\d.saraev.GCM\source\repos\DS_ConsoleApp\MainTools_FW4.7.2\obj\Release\DS_MainTools.v1.csproj.GenerateResource.cache
+C:\Users\d.saraev.GCM\source\repos\DS_ConsoleApp\MainTools_FW4.7.2\obj\Release\DS_MainTools.v1.csproj.CoreCompileInputs.cache
+C:\Users\d.saraev.GCM\source\repos\DS_ConsoleApp\MainTools_FW4.7.2\obj\Release\DS_MainTools_Net_FW_4.7.2.dll
+C:\Users\d.saraev.GCM\source\repos\DS_ConsoleApp\MainTools_FW4.7.2\obj\Release\DS_MainTools_Net_FW_4.7.2.pdb

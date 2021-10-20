@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS_FileSystem.v1", "FileSys
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS_MainTools.v1", "MainTools_FW4.7.2\DS_MainTools.v1.csproj", "{A8F47095-3B89-4A64-9AC3-D5D8289BCDDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindIntersection", "FindIntersection\FindIntersection.csproj", "{BC419DD8-3389-4231-AAB3-FC5375646DFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindIntersection", "FindIntersection\FindIntersection.csproj", "{BC419DD8-3389-4231-AAB3-FC5375646DFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,7 +28,6 @@ Global
 		{A8F47095-3B89-4A64-9AC3-D5D8289BCDDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8F47095-3B89-4A64-9AC3-D5D8289BCDDF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BC419DD8-3389-4231-AAB3-FC5375646DFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC419DD8-3389-4231-AAB3-FC5375646DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC419DD8-3389-4231-AAB3-FC5375646DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC419DD8-3389-4231-AAB3-FC5375646DFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

@@ -105,49 +105,49 @@ namespace DS_Forms
 
         public string DS_OpenOutputFolderDialogForm(string description = "Chose folder", string folderPath = "")
         {
-            FolderBrowserDialog fbd;
-
-            if (folderPath != "")
             {
-                fbd = new FolderBrowserDialog
-                {
-                    Description = description,
-                    SelectedPath = folderPath
-                };
-            }
-            else
-            {
-                fbd = new FolderBrowserDialog
-                {
-                    Description = description
-                };
-            }
+                FolderBrowserDialog fbd;
 
-            // Show testDialog as a modal dialog
-            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-                return "";
-            string sfp = fbd.SelectedPath;
-
-            if (fbd.ShowDialog() == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-            {
-                DS_Tools dS_Tools = new DS_Tools();
-                if (dS_Tools.DS_HasWritePermissionOnDir(sfp) == true)
+                if (folderPath != "")
                 {
-                    return sfp;
+                    fbd = new FolderBrowserDialog
+                    {
+                        Description = description,
+                        SelectedPath = folderPath
+                    };
                 }
                 else
                 {
-                    MessageBox.Show("Error access to path!");
-                    return "";
+                    fbd = new FolderBrowserDialog
+                    {
+                        Description = description
+                    };
                 }
+
+
+                if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    string sfp = fbd.SelectedPath;
+
+                    DS_Tools dS_Tools = new DS_Tools();
+                    if (dS_Tools.DS_HasWritePermissionOnDir(sfp) == true)
+                    {
+                        return sfp;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error access to path!");
+                        return "";
+                    }
+                }
+
+                return "";
+
             }
 
-            return "";
         }
 
-
-
-    }
+        }
 
 }
 
