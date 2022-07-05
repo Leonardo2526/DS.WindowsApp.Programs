@@ -1,5 +1,6 @@
 ﻿using DS_SystemTools;
 using System.Drawing;
+using System.IO;
 using System.Security;
 using System.Windows.Forms;
 
@@ -103,7 +104,7 @@ namespace DS_Forms
             return sfp;
         }
 
-        public string DS_OpenOutputFolderDialogForm(string description = "Chose folder", string folderPath = "")
+        public string DS_OpenOutputFolderDialogForm(string description = "Chose folder", string folderPath = "", string dirToReturn = "")
         {
             {
                 FolderBrowserDialog fbd;
@@ -130,15 +131,21 @@ namespace DS_Forms
                     string sfp = fbd.SelectedPath;
 
                     DS_Tools dS_Tools = new DS_Tools();
-                    if (dS_Tools.DS_HasWritePermissionOnDir(sfp) == true)
-                    {
-                        return sfp;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error access to path!");
-                        return "";
-                    }
+
+                        if (dS_Tools.DS_HasWritePermissionOnDir(sfp) == true)
+                        {
+                            if (!Directory.Exists(dirToReturn))
+                            {
+                                Directory.CreateDirectory(dirToReturn);
+                            }
+                            return dirToReturn;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error access to path!");
+                            return "";
+                        }
+
                 }
 
                 return "";

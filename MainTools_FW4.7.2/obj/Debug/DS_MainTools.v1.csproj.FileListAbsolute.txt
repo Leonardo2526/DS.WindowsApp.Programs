@@ -16,3 +16,12 @@ C:\Users\d.saraev\source\repos\DS_WindowsFormsApp\DS_WindowsFormsApp_MainTools_F
 C:\Users\d.saraev\source\repos\DS_WindowsFormsApp\DS_WindowsFormsApp_MainTools_FW4.7.2\DS_MainTools.v1\obj\Debug\DS_MainTools.v1.csproj.CoreCompileInputs.cache
 C:\Users\d.saraev\source\repos\DS_WindowsFormsApp\DS_WindowsFormsApp_MainTools_FW4.7.2\DS_MainTools.v1\obj\Debug\DS_MainTools_Net_FW_4.7.2.dll
 C:\Users\d.saraev\source\repos\DS_WindowsFormsApp\DS_WindowsFormsApp_MainTools_FW4.7.2\DS_MainTools.v1\obj\Debug\DS_MainTools_Net_FW_4.7.2.pdb
+E:\Repository\DS.WindowsApp.Programs\MainTools_FW4.7.2\bin\Debug\DS_MainTools_Net_FW_4.7.2.dll.config
+E:\Repository\DS.WindowsApp.Programs\MainTools_FW4.7.2\bin\Debug\DS_MainTools_Net_FW_4.7.2.dll
+E:\Repository\DS.WindowsApp.Programs\MainTools_FW4.7.2\bin\Debug\DS_MainTools_Net_FW_4.7.2.pdb
+E:\Repository\DS.WindowsApp.Programs\MainTools_FW4.7.2\obj\Debug\DS_MainTools.v1.csproj.AssemblyReference.cache
+E:\Repository\DS.WindowsApp.Programs\MainTools_FW4.7.2\obj\Debug\DS_MainTools_Net_FW_4._7._2.Properties.Resources.resources
+E:\Repository\DS.WindowsApp.Programs\MainTools_FW4.7.2\obj\Debug\DS_MainTools.v1.csproj.GenerateResource.cache
+E:\Repository\DS.WindowsApp.Programs\MainTools_FW4.7.2\obj\Debug\DS_MainTools.v1.csproj.CoreCompileInputs.cache
+E:\Repository\DS.WindowsApp.Programs\MainTools_FW4.7.2\obj\Debug\DS_MainTools_Net_FW_4.7.2.dll
+E:\Repository\DS.WindowsApp.Programs\MainTools_FW4.7.2\obj\Debug\DS_MainTools_Net_FW_4.7.2.pdb
