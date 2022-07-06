@@ -104,12 +104,12 @@ namespace DS_Forms
             return sfp;
         }
 
-        public string DS_OpenOutputFolderDialogForm(string description = "Chose folder", string folderPath = "", string dirToReturn = "")
+        public string DS_OpenOutputFolderDialogForm(string description = "Chose folder", string folderPath = "")
         {
             {
                 FolderBrowserDialog fbd;
 
-                if (folderPath != "")
+                if (folderPath != "" && Directory.Exists(folderPath))
                 {
                     fbd = new FolderBrowserDialog
                     {
@@ -134,11 +134,7 @@ namespace DS_Forms
 
                         if (dS_Tools.DS_HasWritePermissionOnDir(sfp) == true)
                         {
-                            if (!Directory.Exists(dirToReturn))
-                            {
-                                Directory.CreateDirectory(dirToReturn);
-                            }
-                            return dirToReturn;
+                            return sfp;
                         }
                         else
                         {
