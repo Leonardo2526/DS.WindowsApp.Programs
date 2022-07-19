@@ -1,5 +1,7 @@
 ﻿using System;
-using DSUtils.GridMap;
+using DS.PathSearch;
+using DS.PathSearch.GridMap;
+
 
 namespace HPA
 {
@@ -7,7 +9,7 @@ namespace HPA
     {
         static void Main(string[] args)
         {
-            IMap map = new DSUtils.GridMap.d2.Map2d100();
+            IMap map = new DS.PathSearch.GridMap.d2.MapXY100();
             HPAAlgorythm.GetPath(map); 
              
             Print(map);

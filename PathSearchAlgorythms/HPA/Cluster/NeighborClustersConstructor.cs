@@ -1,4 +1,5 @@
-﻿using DSUtils;
+﻿using DS.PathSearch;
+using DS.PathSearch.GridMap;
 using System.Collections.Generic;
 
 namespace HPA

@@ -1,7 +1,6 @@
 ﻿using FrancoGustavo;
 using System.Collections.Generic;
-using DSUtils;
-using DSUtils.GridMap;
+using DS.PathSearch.GridMap;
 
 namespace HPA
 {
@@ -36,7 +35,8 @@ namespace HPA
             AbstractGraph.CutMatrix();
             AbstractGraph.SetNodesList();
 
-            List<PathFinderNode> abstractPath = FGAlgorythm.GetPathByGraph(new Graph1(Map));
+            List<PathFinderNode> abstractPath = FGAlgorythm.GetPathByMap(Map, new PathRequiment1());
+            //List<PathFinderNode> abstractPath = FGAlgorythm.GetPathByGraph(new Graph1(Map));
             PathConvertor pathConvertor = new PathConvertor();
             List<AbstractNode> convertedPath = pathConvertor.Convert(abstractPath);
 

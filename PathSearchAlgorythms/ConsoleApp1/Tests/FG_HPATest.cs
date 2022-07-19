@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
-using DSUtils.GridMap;
+using DS.PathSearch.GridMap;
+using HPA;
 
 namespace Benchmark
 {
@@ -8,12 +9,12 @@ namespace Benchmark
     public class FGHPATest
     {
         public static int Count;
-        IMap Map = new DSUtils.GridMap.d2.Map2d100();
+        IMap Map = new DS.PathSearch.GridMap.d2.MapXY100();
 
         [Benchmark]
         public void HPATest1()
         {
-            HPA.HPAAlgorythm.GetPath(Map);
+            HPAAlgorythm.GetPath(Map);
         }
 
         [Benchmark]

@@ -27,18 +27,18 @@ namespace FrancoGustavo
 
 
             ResolveMap(MapXY20);
-            ResolveMap(MapXY20v1);
-            ResolveMap(MapXY20v3);
-            ResolveMap(MapXZ20v1);
-            ResolveMap(MapXZ20v3);
-            ResolveMap(MapXZ100);
+            //ResolveMap(MapXY20v1);
+            //ResolveMap(MapXY20v3);
+            //ResolveMap(MapXZ20v1);
+            //ResolveMap(MapXZ20v3);
+            //ResolveMap(MapXZ100);
 
             Console.ReadLine();
         }
 
         static void ResolveMap(IMap map)
         {
-            List<PathFinderNode> Path = FGAlgorythm.GetPathByMap(map, new PathRequiment2());
+            List<PathFinderNode> Path = FGAlgorythm.GetPathByMap(map, new PathRequiment0());
             ShowResult(map, Path);
             ShowPathInfo(Path);
         }

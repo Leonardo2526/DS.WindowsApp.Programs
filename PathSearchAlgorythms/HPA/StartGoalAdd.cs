@@ -1,5 +1,6 @@
-﻿using DSUtils;
-using DSUtils.GridMap;
+﻿
+using DS.PathSearch;
+using DS.PathSearch.GridMap;
 
 namespace HPA
 {

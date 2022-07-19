@@ -1,5 +1,5 @@
-﻿using DSUtils;
-using DSUtils.GridMap;
+﻿using DS.PathSearch;
+using DS.PathSearch.GridMap;
 using System;
 using System.Collections.Generic;
 

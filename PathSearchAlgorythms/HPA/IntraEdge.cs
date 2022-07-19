@@ -1,4 +1,5 @@
-﻿using DSUtils;
+﻿using DS.PathSearch;
+using DS.PathSearch.GridMap;
 using FrancoGustavo;
 using System.Collections.Generic;
 
@@ -79,7 +80,7 @@ namespace HPA
             int count;
 
             //Call A*
-            List<PathFinderNode> intraPath = FGAlgorythm.GetPathByMap(clusterMap);
+            List<PathFinderNode> intraPath = FGAlgorythm.GetPathByMap(clusterMap, new PathRequiment2());
 
             if (intraPath == null)
                 return 0;

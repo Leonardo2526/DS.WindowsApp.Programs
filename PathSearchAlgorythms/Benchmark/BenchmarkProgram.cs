@@ -9,7 +9,7 @@ namespace Benchmark
         {
             {
                 //BenchmarkRunner.Run<FGHPATest>();
-                BenchmarkRunner.Run<FrancoGustavoTest>(); 
+                BenchmarkRunner.Run<FrancoGustavoTest>();
                 //BenchmarkRunner.Run<HPATest>();
                 Console.ReadLine();
             }
