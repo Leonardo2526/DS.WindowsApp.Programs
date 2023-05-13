@@ -13,10 +13,15 @@
 
 using DS.PathSearch;
 using DS.PathSearch.GridMap;
+using DS.RevitLib.Utils.Collisions.Detectors;
+using DS.RevitLib.Utils.Various;
+using DS.ClassLib.VarUtils.Points;
 using FrancoGustavo.CLZ;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows;
+using System.Windows.Media.Media3D;
 
 namespace FrancoGustavo
 {
@@ -73,13 +78,15 @@ namespace FrancoGustavo
 
         #region Variables Declaration
         private int[,,] mGrid = null;
+        private readonly CollisionDetectorByTrace _collisionDetector;
+        private readonly DS.RevitLib.Utils.Various.PointConverter _pointConverter;
         private PriorityQueueB<PathFinderNode> mOpen = new PriorityQueueB<PathFinderNode>(new ComparePFNode());
         private List<PathFinderNode> mClose = new List<PathFinderNode>();
         private bool mStop = false;
         private bool mStopped = true;
         private int mHoriz = 0;
         private HeuristicFormula mFormula = HeuristicFormula.Manhattan;
-        private bool mDiagonals = false; 
+        private bool mDiagonals = false;
         private int mHEstimate = 2;
         private bool mPunishChangeDirection = false;
         private bool mReopenCloseNodes = true;
@@ -96,12 +103,16 @@ namespace FrancoGustavo
         #endregion
 
         #region Constructors
-        public PathFinder(int[,,] grid, IPathRequiment pathRequiment)
+        public PathFinder(int[,,] grid, IPathRequiment pathRequiment,
+            CollisionDetectorByTrace collisionDetector,
+            DS.RevitLib.Utils.Various.PointConverter pointConverter)
         {
             if (grid == null)
                 throw new Exception("Grid cannot be null");
 
             mGrid = grid;
+            _collisionDetector = collisionDetector;
+            _pointConverter = pointConverter;
             mCLZdist = pathRequiment.Clearance;
             mANGlength = pathRequiment.MinAngleDistance;
         }
@@ -242,16 +253,35 @@ namespace FrancoGustavo
                 }
 
                 if (mPunishChangeDirection)
-                    mHoriz = (parentNode.X - parentNode.PX); 
+                    mHoriz = (parentNode.X - parentNode.PX);
+
+                //specify available direction for nodes (successors)
+                Point3D anglePoint = new Point3D(parentNode.ANX, parentNode.ANY, parentNode.ANZ);
+                Point3D parentNodePoint = new Point3D(parentNode.X, parentNode.Y, parentNode.Z);
+                var distToANP = anglePoint.DistanceTo(parentNodePoint);
+                Vector3D dir = (parentNodePoint - anglePoint);
+                if(dir.Length !=0)
+                {dir.Normalize();}
+                dir = dir.ConvertToSByte();
+
+                sbyte[,] availableDirections = distToANP == 0 || distToANP >= mANGlength ?
+                     direction :
+                     new sbyte[1, 3] { { Convert.ToSByte(dir.X), Convert.ToSByte(dir.Y), Convert.ToSByte(dir.Z) } };
 
                 //Lets calculate each successors
-                for (int i = 0; i <= (mDiagonals ? 8 : direction.GetUpperBound(0)); i++)
+                for (int i = 0; i <= (mDiagonals ? 8 : availableDirections.GetUpperBound(0)); i++)
                 {
                     PathFinderNode newNode;
-                    newNode.X = parentNode.X + direction[i, 0];
-                    newNode.Y = parentNode.Y + direction[i, 1];
-                    newNode.Z = parentNode.Z + direction[i, 2];
+
+                    Vector3D nodeDir = new Vector3D(availableDirections[i, 0], availableDirections[i, 1], availableDirections[i, 2]);
+
+                    newNode.X = parentNode.X + availableDirections[i, 0];
+                    newNode.Y = parentNode.Y + availableDirections[i, 1];
+                    newNode.Z = parentNode.Z + availableDirections[i, 2];
                     newNode.Id = 0;
+
+
+
 
                     if (newNode.X < 0 || newNode.Y < 0 || newNode.Z < 0 || newNode.X >= gridX || newNode.Y >= gridY || newNode.Z >= gridZ)
                         continue;
@@ -268,11 +298,11 @@ namespace FrancoGustavo
                         if (!cLZChecker.CheckNode(newNode.X, newNode.Y, newNode.Z, gridX, gridY, gridZ))
                             continue;
                     }
-                    else
-                    {
-                        if (mGrid[newNode.X, newNode.Y, newNode.Z] == 1)
-                            continue;
-                    }
+                    //else
+                    //{
+                    //    if (mGrid[newNode.X, newNode.Y, newNode.Z] == 1)
+                    //        continue;
+                    //}
 
 
                     if (mCompactPath)
@@ -299,7 +329,7 @@ namespace FrancoGustavo
 
                     if (mPunishChangeDirection)
                     {
-                        newG += PunishChangeDirectionChecker.GetNewG(newNode.X, newNode.Y, newNode.Z, 
+                        newG += PunishChangeDirectionChecker.GetNewG(newNode.X, newNode.Y, newNode.Z,
                             parentNode, start, newG);
 
                     }
@@ -331,26 +361,46 @@ namespace FrancoGustavo
                         continue;
 
 
+                    //set ANP for new node
+                    Point3D ANP = dir.X == nodeDir.X && dir.Y == nodeDir.Y && dir.Z == nodeDir.Z ?
+                        anglePoint :
+                        parentNodePoint;
 
                     newNode.PX = parentNode.X;
                     newNode.PY = parentNode.Y;
                     newNode.PZ = parentNode.Z;
                     newNode.G = newG;
-                    newNode.ANX = 0;
-                    newNode.ANY = 0;
-                    newNode.ANZ = 0;
+                    newNode.ANX = Convert.ToInt32(ANP.X);
+                    newNode.ANY = Convert.ToInt32(ANP.Y);
+                    newNode.ANZ = Convert.ToInt32(ANP.Z);
 
-                    if (mANGlength != 0)
+                    var passValue = mGrid[newNode.X, newNode.Y, newNode.Z];
+                    if (passValue == 0)
                     {
-                        if (!NodesCheker.IfMinLength(mANGlength, parentNode, newNode.X, newNode.Y, newNode.Z))
-                            continue;
-                        else
-                        {
-                            newNode.ANX = NodesCheker.newNodeANX;
-                            newNode.ANY = NodesCheker.newNodeANY;
-                            newNode.ANZ = NodesCheker.newNodeANZ;
-                        }
+                        //check collisions
+                        var xyzParentNode = _pointConverter.ConvertToUSC1(new Point3D(parentNode.X, parentNode.Y, parentNode.Z));
+                        var xyzNewNode = _pointConverter.ConvertToUSC1(new Point3D(newNode.X, newNode.Y, newNode.Z));
+                        _collisionDetector.GetCollisions(xyzParentNode, xyzNewNode);
+                        if (_collisionDetector.Collisions.Count > 0)
+                        { mGrid[newNode.X, newNode.Y, newNode.Z] = 1; } //unpassable point
+                        else { mGrid[newNode.X, newNode.Y, newNode.Z] = 2; } // passable point
                     }
+                    else if (passValue == 1) { continue; }
+                    //else
+                    //{
+                    //    newNode.ANX = NodesCheker.newNodeANX;
+                    //    newNode.ANY = NodesCheker.newNodeANY;
+                    //    newNode.ANZ = NodesCheker.newNodeANZ;
+                    //}
+                    //if (mANGlength != 0)
+                    //{
+                    //    if (!NodesCheker.IfMinLength(mANGlength, parentNode, newNode.X, newNode.Y, newNode.Z))
+                    //        continue;
+                    //    else
+                    //    {
+
+                    //    }
+                    //}
 
                     switch (mFormula)
                     {
@@ -373,7 +423,7 @@ namespace FrancoGustavo
                             newNode.H = (int)(mHEstimate * (Math.Pow((newNode.X - end.X), 2) + Math.Pow((newNode.Y - end.Y), 2)));
                             break;
                         case HeuristicFormula.Custom1:
-                            Point dxy = new Point(Math.Abs(end.X - newNode.X), Math.Abs(end.Y - newNode.Y));
+                            Location dxy = new Location(Math.Abs(end.X - newNode.X), Math.Abs(end.Y - newNode.Y), 0);
                             int Orthogonal = Math.Abs(dxy.X - dxy.Y);
                             int Diagonal = Math.Abs(((dxy.X + dxy.Y) - Orthogonal) / 2);
                             newNode.H = mHEstimate * (Diagonal + Orthogonal + dxy.X + dxy.Y);

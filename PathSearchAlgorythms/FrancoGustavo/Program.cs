@@ -26,7 +26,7 @@ namespace FrancoGustavo
 
 
 
-            ResolveMap(MapXY20);
+            //ResolveMap(MapXY20v3);
             //ResolveMap(MapXY20v1);
             //ResolveMap(MapXY20v3);
             //ResolveMap(MapXZ20v1);
@@ -36,12 +36,12 @@ namespace FrancoGustavo
             Console.ReadLine();
         }
 
-        static void ResolveMap(IMap map)
-        {
-            List<PathFinderNode> Path = FGAlgorythm.GetPathByMap(map, new PathRequiment0());
-            ShowResult(map, Path);
-            ShowPathInfo(Path);
-        }
+        //static void ResolveMap(IMap map)
+        //{
+        //    List<PathFinderNode> Path = FGAlgorythm.GetPathByMap(map, new PathRequiment02());
+        //    ShowResult(map, Path);
+        //    ShowPathInfo(Path);
+        //}
 
         static void ShowResult(IMap Map, List<PathFinderNode> path)
         {
