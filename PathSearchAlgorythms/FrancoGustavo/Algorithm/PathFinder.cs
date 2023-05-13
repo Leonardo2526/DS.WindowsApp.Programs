@@ -281,8 +281,6 @@ namespace FrancoGustavo
                     newNode.Id = 0;
 
 
-
-
                     if (newNode.X < 0 || newNode.Y < 0 || newNode.Z < 0 || newNode.X >= gridX || newNode.Y >= gridY || newNode.Z >= gridZ)
                         continue;
 
@@ -291,19 +289,6 @@ namespace FrancoGustavo
                         newG = parentNode.G + (int)(mGrid[newNode.X, newNode.Y, newNode.Z] * 2.41);
                     else
                         newG = parentNode.G + mGrid[newNode.X, newNode.Y, newNode.Z];
-
-                    //check point by obstacles and clerance zone
-                    if (cLZChecker != null)
-                    {
-                        if (!cLZChecker.CheckNode(newNode.X, newNode.Y, newNode.Z, gridX, gridY, gridZ))
-                            continue;
-                    }
-                    //else
-                    //{
-                    //    if (mGrid[newNode.X, newNode.Y, newNode.Z] == 1)
-                    //        continue;
-                    //}
-
 
                     if (mCompactPath)
                     {
@@ -382,25 +367,10 @@ namespace FrancoGustavo
                         var xyzNewNode = _pointConverter.ConvertToUSC1(new Point3D(newNode.X, newNode.Y, newNode.Z));
                         _collisionDetector.GetCollisions(xyzParentNode, xyzNewNode);
                         if (_collisionDetector.Collisions.Count > 0)
-                        { mGrid[newNode.X, newNode.Y, newNode.Z] = 1; } //unpassable point
+                        { mGrid[newNode.X, newNode.Y, newNode.Z] = 1; continue; } //unpassable point
                         else { mGrid[newNode.X, newNode.Y, newNode.Z] = 2; } // passable point
                     }
-                    else if (passValue == 1) { continue; }
-                    //else
-                    //{
-                    //    newNode.ANX = NodesCheker.newNodeANX;
-                    //    newNode.ANY = NodesCheker.newNodeANY;
-                    //    newNode.ANZ = NodesCheker.newNodeANZ;
-                    //}
-                    //if (mANGlength != 0)
-                    //{
-                    //    if (!NodesCheker.IfMinLength(mANGlength, parentNode, newNode.X, newNode.Y, newNode.Z))
-                    //        continue;
-                    //    else
-                    //    {
-
-                    //    }
-                    //}
+                    else if (passValue == 1) { continue; }                    
 
                     switch (mFormula)
                     {
