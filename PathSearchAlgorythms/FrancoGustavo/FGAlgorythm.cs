@@ -8,8 +8,8 @@ namespace FrancoGustavo
     public class FGAlgorythm
     {
         public static List<PathFinderNode> GetPathByMap(IMap Map, IPathRequiment pathRequiment,
-            CollisionDetectorByTrace collisionDetector, 
-            PointConverter pointConverter)
+            CollisionDetectorByTrace collisionDetector,
+            IPointConverter pointConverter)
         {
             List<PathFinderNode> path = new List<PathFinderNode>();
 

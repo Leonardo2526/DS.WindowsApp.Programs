@@ -79,7 +79,7 @@ namespace FrancoGustavo
         #region Variables Declaration
         private int[,,] mGrid = null;
         private readonly CollisionDetectorByTrace _collisionDetector;
-        private readonly DS.RevitLib.Utils.Various.PointConverter _pointConverter;
+        private readonly DS.RevitLib.Utils.Various.IPointConverter _pointConverter;
         private PriorityQueueB<PathFinderNode> mOpen = new PriorityQueueB<PathFinderNode>(new ComparePFNode());
         private List<PathFinderNode> mClose = new List<PathFinderNode>();
         private bool mStop = false;
@@ -105,7 +105,7 @@ namespace FrancoGustavo
         #region Constructors
         public PathFinder(int[,,] grid, IPathRequiment pathRequiment,
             CollisionDetectorByTrace collisionDetector,
-            DS.RevitLib.Utils.Various.PointConverter pointConverter)
+            DS.RevitLib.Utils.Various.IPointConverter pointConverter)
         {
             if (grid == null)
                 throw new Exception("Grid cannot be null");
