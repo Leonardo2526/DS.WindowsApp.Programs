@@ -1,5 +1,5 @@
 ﻿using AStarAlgorythm;
-using DS.System;
+using DS.PathSearch;
 using System;
 using System.Collections.Generic;
 

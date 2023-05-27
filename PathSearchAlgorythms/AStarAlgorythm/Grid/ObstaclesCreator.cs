@@ -1,6 +1,5 @@
-﻿using DSUtils;
-using AStarAlgorythm.CLZ;
-
+﻿using AStarAlgorythm.CLZ;
+using DS.PathSearch;
 
 namespace AStarAlgorythm
 

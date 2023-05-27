@@ -45,9 +45,6 @@
     <Reference Include="DS.PathSearch">
       <HintPath>..\..\DS.Utils\DS.Utils\bin\Release\DS.PathSearch.dll</HintPath>
     </Reference>
-    <Reference Include="DS.RevitLib.Utils">
-      <HintPath>..\..\..\DS.RevitLib.Utils\DS.RevitLib.Utils\bin\Debug\DS.RevitLib.Utils.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />

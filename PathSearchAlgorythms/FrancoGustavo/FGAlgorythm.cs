@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
+using DS.ClassLib.VarUtils.Collisions;
+using DS.ClassLib.VarUtils.Points;
 using DS.PathSearch.GridMap;
-using DS.RevitLib.Utils.Collisions.Detectors;
-using DS.RevitLib.Utils.Various;
 
 namespace FrancoGustavo 
 { 
     public class FGAlgorythm
     {
         public static List<PathFinderNode> GetPathByMap(IMap Map, IPathRequiment pathRequiment,
-            CollisionDetectorByTrace collisionDetector,
+            ITraceCollisionDetector collisionDetector,
             IPointConverter pointConverter)
         {
             List<PathFinderNode> path = new List<PathFinderNode>();

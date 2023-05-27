@@ -1,4 +1,4 @@
-﻿using DSUtils;
+﻿using DS.PathSearch;
 
 namespace AStarAlgorythm
 

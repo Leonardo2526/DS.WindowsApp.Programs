@@ -1,5 +1,5 @@
 ﻿using AStarAlgorythm;
-using DS.System;
+using DS.PathSearch;
 using System;
 using System.Collections.Generic;
 
@@ -14,8 +14,8 @@ namespace Implementation
 
         public Input2D()
         {
-            int goalCoords = 999;
-            int maxPointCoords = 1000;
+            int goalCoords = 9;
+            int maxPointCoords = 10;
 
             Start = new Location(0, 0, 0);
             Goal = new Location(goalCoords, goalCoords, 0);

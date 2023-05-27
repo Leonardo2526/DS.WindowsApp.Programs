@@ -1,8 +1,8 @@
 ﻿using AStarAlgorythm;
+using DS.PathSearch;
 using System;
 using System.Collections.Generic;
 using WaveAlgorythm;
-using DS.System;
 
 namespace Implementation
 {
@@ -18,10 +18,10 @@ namespace Implementation
 
             AStar aStar = new AStar(dataInput.Start, dataInput.Goal, dataInput.MaxGridPoint, dataInput.Unpassablelocations);
             List<Location> AStarPath = aStar.GetPath();
-            //List<Location> AStarPath = aStar.GetPathWithVisualizition();
+            AStarPath = aStar.GetPathWithVisualizition();
 
-            //Console.WriteLine(AStarPath.Count.ToString());
-            //Console.ReadLine();
+            Console.WriteLine(AStarPath.Count.ToString());
+            Console.ReadLine();
         }
     }
 }

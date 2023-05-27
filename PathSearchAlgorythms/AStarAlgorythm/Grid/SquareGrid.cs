@@ -1,5 +1,5 @@
 ﻿using AStarAlgorythm.CLZ;
-using DSUtils;
+using DS.PathSearch;
 using System.Collections.Generic;
 
 namespace AStarAlgorythm

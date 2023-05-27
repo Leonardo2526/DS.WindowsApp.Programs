@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Original", "Original", "{C7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FG.AStar.Original", "FG.AStar.Original\FG.AStar.Original.csproj", "{C860269C-831F-44D5-916F-A03BF2DA513A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmark", "ConsoleApp1\Benchmark.csproj", "{8FB8276C-6C24-452D-ABD7-4E20E27E575C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmark", "ConsoleApp1\Benchmark.csproj", "{8FB8276C-6C24-452D-ABD7-4E20E27E575C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathFindTest", "FrancoGustavoTest\PathFindTest.csproj", "{0F079D0A-F7C2-40E8-B109-40B20DE23D83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{8FB8276C-6C24-452D-ABD7-4E20E27E575C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FB8276C-6C24-452D-ABD7-4E20E27E575C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FB8276C-6C24-452D-ABD7-4E20E27E575C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F079D0A-F7C2-40E8-B109-40B20DE23D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F079D0A-F7C2-40E8-B109-40B20DE23D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F079D0A-F7C2-40E8-B109-40B20DE23D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F079D0A-F7C2-40E8-B109-40B20DE23D83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

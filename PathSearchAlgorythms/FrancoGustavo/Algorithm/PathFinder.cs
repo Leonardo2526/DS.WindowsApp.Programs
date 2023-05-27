@@ -13,8 +13,6 @@
 
 using DS.PathSearch;
 using DS.PathSearch.GridMap;
-using DS.RevitLib.Utils.Collisions.Detectors;
-using DS.RevitLib.Utils.Various;
 using DS.ClassLib.VarUtils.Points;
 using FrancoGustavo.CLZ;
 using System;
@@ -22,6 +20,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Media.Media3D;
+using DS.ClassLib.VarUtils.Collisions;
 
 namespace FrancoGustavo
 {
@@ -78,8 +77,8 @@ namespace FrancoGustavo
 
         #region Variables Declaration
         private int[,,] mGrid = null;
-        private readonly CollisionDetectorByTrace _collisionDetector;
-        private readonly DS.RevitLib.Utils.Various.IPointConverter _pointConverter;
+        private readonly ITraceCollisionDetector _collisionDetector;
+        private readonly IPointConverter _pointConverter;
         private PriorityQueueB<PathFinderNode> mOpen = new PriorityQueueB<PathFinderNode>(new ComparePFNode());
         private List<PathFinderNode> mClose = new List<PathFinderNode>();
         private bool mStop = false;
@@ -104,8 +103,8 @@ namespace FrancoGustavo
 
         #region Constructors
         public PathFinder(int[,,] grid, IPathRequiment pathRequiment,
-            CollisionDetectorByTrace collisionDetector,
-            DS.RevitLib.Utils.Various.IPointConverter pointConverter)
+            ITraceCollisionDetector collisionDetector,
+           IPointConverter pointConverter)
         {
             if (grid == null)
                 throw new Exception("Grid cannot be null");
@@ -363,8 +362,8 @@ namespace FrancoGustavo
                     if (passValue == 0)
                     {
                         //check collisions
-                        var xyzParentNode = _pointConverter.ConvertToUSC1(new Point3D(parentNode.X, parentNode.Y, parentNode.Z));
-                        var xyzNewNode = _pointConverter.ConvertToUSC1(new Point3D(newNode.X, newNode.Y, newNode.Z));
+                        var xyzParentNode = _pointConverter.ConvertToUCS1(new Point3D(parentNode.X, parentNode.Y, parentNode.Z));
+                        var xyzNewNode = _pointConverter.ConvertToUCS1(new Point3D(newNode.X, newNode.Y, newNode.Z));
                         _collisionDetector.GetCollisions(xyzParentNode, xyzNewNode);
                         if (_collisionDetector.Collisions.Count > 0)
                         { mGrid[newNode.X, newNode.Y, newNode.Z] = 1; continue; } //unpassable point

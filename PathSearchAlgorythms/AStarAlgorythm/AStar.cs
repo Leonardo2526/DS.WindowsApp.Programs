@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DSUtils;
+using DS.PathSearch;
 
 namespace AStarAlgorythm
 {

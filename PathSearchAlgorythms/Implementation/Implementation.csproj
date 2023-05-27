@@ -38,6 +38,12 @@
       <HintPath>..\AStarAlgorythm\bin\Debug\AStarAlgorythm.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DS.ClassLib.VarUtils">
+      <HintPath>..\..\..\DS.CommonLib.Utils\DS.ClassLib.VarUtils\bin\Debug\DS.ClassLib.VarUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="DS.PathSearch">
+      <HintPath>..\..\..\DS.CommonLib.Utils\DS.Utils\bin\Release\DS.PathSearch.dll</HintPath>
+    </Reference>
     <Reference Include="DS.System, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\DS.System\DS.System\bin\Release\DS.System.dll</HintPath>
