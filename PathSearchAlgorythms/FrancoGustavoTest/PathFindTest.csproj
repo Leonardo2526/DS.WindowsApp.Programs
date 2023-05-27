@@ -5,6 +5,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	  <TargetFramework>net6.0-windows</TargetFramework>
+	  <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,9 +19,6 @@
     </Reference>
     <Reference Include="DS.PathSearch">
       <HintPath>..\..\..\DS.CommonLib.Utils\DS.Utils\bin\Release\DS.PathSearch.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\PresentationCore.dll</HintPath>
     </Reference>
   </ItemGroup>
 
