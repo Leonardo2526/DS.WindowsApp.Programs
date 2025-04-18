@@ -1,13 +1,15 @@
 // Program.cs
-using Microsoft.Extensions.Hosting;
+using CleanupService;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .UseWindowsService(options =>
     {
         options.ServiceName = "File Cleanup Service";
     })
-    .ConfigureServices(services =>
+    .ConfigureServices((context, services) =>
     {
+        // Регистрируем конфигурацию
+        services.Configure<FileCleanupSettings>(context.Configuration.GetSection("FileCleanupSettings"));
         services.AddHostedService<FileCleanupService>();
     })
     .ConfigureLogging(logging =>
