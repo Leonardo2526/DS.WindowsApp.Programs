@@ -1,83 +1,81 @@
-﻿// Worker.cs
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System.IO;
+﻿using Microsoft.Extensions.Options;
 using System.Timers;
 using Timer = System.Timers.Timer;
 
-public class FileCleanupService : BackgroundService
+namespace CleanupService
 {
-    private readonly ILogger<FileCleanupService> _logger;
-    private Timer _timer;
-    private readonly string _directoryToClean = @"C:\Temp\Cleanup";
-    private readonly TimeSpan _fileAgeThreshold = TimeSpan.FromMinutes(5);
-    //private readonly TimeSpan _fileAgeThreshold = TimeSpan.FromDays(14);
-    private readonly int _checkIntervalInSeconds = 15;
-    //private readonly int _checkIntervalInDays = 30;
-
-    public FileCleanupService(ILogger<FileCleanupService> logger)
+    public class FileCleanupService : BackgroundService
     {
-        _logger = logger;
-    }
+        private readonly ILogger<FileCleanupService> _logger;
+        private readonly FileCleanupSettings _settings;
+        private readonly Timer _timer;
 
-    protected override Task ExecuteAsync(CancellationToken stoppingToken)
-    {
-        _timer = new Timer(TimeSpan.FromSeconds(_checkIntervalInSeconds).TotalMilliseconds);
-        //_timer = new Timer(TimeSpan.FromDays(_checkIntervalInDays).TotalMilliseconds);
-        _timer.Elapsed += CleanupFiles;
-        _timer.AutoReset = true;
-        _timer.Enabled = true;
-
-        // Выполнить сразу при старте
-        CleanupFiles(null, null);
-
-        return Task.CompletedTask;
-    }
-
-    private void CleanupFiles(object sender, ElapsedEventArgs e)
-    {
-        try
+        public FileCleanupService(ILogger<FileCleanupService> logger, IOptions<FileCleanupSettings> settings)
         {
-            _logger.LogInformation("Starting file cleanup...");
-
-            if (!Directory.Exists(_directoryToClean))
+            _logger = logger;
+            _settings = settings.Value;
+            _timer = new Timer(TimeSpan.FromDays(_settings.CheckIntervalDays).TotalMilliseconds)
             {
-                _logger.LogWarning($"Directory not found: {_directoryToClean}");
-                return;
-            }
+                AutoReset = true,
+                Enabled = true
+            };
+        }
 
-            var cutoffDate = DateTime.Now - _fileAgeThreshold;
-            var filesDeleted = 0;
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            _timer.Elapsed += CleanupFiles;
 
-            foreach (var file in Directory.GetFiles(_directoryToClean))
+            // Выполнить сразу при старте
+            CleanupFiles(this, null);
+
+            return Task.CompletedTask;
+        }
+
+        private void CleanupFiles(object sender, ElapsedEventArgs e)
+        {
+            try
             {
-                try
+                _logger.LogInformation("Starting file cleanup...");
+
+                if (!Directory.Exists(_settings.DirectoryToClean))
                 {
-                    var fileInfo = new FileInfo(file);
-                    if (fileInfo.LastWriteTime < cutoffDate)
+                    _logger.LogWarning($"Directory not found: {_settings.DirectoryToClean}");
+                    return;
+                }
+
+                var cutoffDate = DateTime.Now - TimeSpan.FromDays(_settings.FileAgeThresholdDays);
+                var filesDeleted = 0;
+
+                foreach (var file in Directory.GetFiles(_settings.DirectoryToClean))
+                {
+                    try
                     {
-                        fileInfo.Delete();
-                        filesDeleted++;
-                        _logger.LogInformation($"Deleted file: {file}");
+                        var fileInfo = new FileInfo(file);
+                        if (fileInfo.LastWriteTime < cutoffDate)
+                        {
+                            fileInfo.Delete();
+                            filesDeleted++;
+                            _logger.LogInformation($"Deleted file: {file}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, $"Error deleting file {file}");
                     }
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, $"Error deleting file {file}");
-                }
+
+                _logger.LogInformation($"File cleanup completed. Deleted {filesDeleted} files.");
             }
-
-            _logger.LogInformation($"File cleanup completed. Deleted {filesDeleted} files.");
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during file cleanup");
+            }
         }
-        catch (Exception ex)
+
+        public override void Dispose()
         {
-            _logger.LogError(ex, "Error during file cleanup");
+            _timer?.Dispose();
+            base.Dispose();
         }
-    }
-
-    public override void Dispose()
-    {
-        _timer?.Dispose();
-        base.Dispose();
     }
 }
